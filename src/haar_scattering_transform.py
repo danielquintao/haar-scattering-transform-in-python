@@ -8,6 +8,11 @@ import pprint
 
 class HaarScatteringTransform:
     def __init__(self, graph_domain: igraph.Graph, J: int = 2):
+        """ initialize object for Haar scattering Transform of incoming signals in a predefined graph structure
+
+        :param graph_domain: igraph.Graph instance
+        :param J: desired maximum scale/ may be automatically downgraded
+        """
         self.graph_domain = copy.deepcopy(graph_domain)
         self.N = graph_domain.vcount()
         self.J = min(J, np.floor(np.log2(self.N)))
@@ -49,12 +54,18 @@ class HaarScatteringTransform:
             self.multi_resolution_approx_pairings.append(membership_)
 
     def get_haar_scattering_transform(self, signal: np.ndarray):
+        """computes each layer's Haar scattering transforms for a signal defined on the graph used in __init__
+
+        :param signal: 1D numpy array with scalar signals COHERENTLY WITH THE ORDER OF THE (DOMAIN) GRAPH VERTICES
+        :return: list with the Haar Scattering transforms at each scale (use last layer's coefficients for classif.)
+        """
         if not isinstance(signal, np.ndarray) or signal.shape not in [(len(signal),), (len(signal), 1)]:
             raise ValueError("signal in unexpected format; should be 1D numpy array or column vector (numpy array)")
         signal = signal.reshape(-1, 1)
         if self.N != len(signal):
             raise ValueError("signal of incorrect length")
-        transform = [signal, np.zeros((self.N // 2, 2)), np.zeros((self.N // 4, 4))]
+        J = len(self.multi_resolution_approx_pairings)
+        transform = [signal] + [np.zeros((self.N // (2 ** j), 2 ** j)) for j in range(1, J)]
         for j in range(1, len(transform)):
             _, n_cols = transform[j-1].shape
             for q in range(n_cols):
