@@ -33,7 +33,17 @@ def compute_max_matching(node_array):
     graph.find_max_matching()
     dict = graph.create_matching_dict()
 
-    return dict
+    # there is a crazy bug with blossom in which node indices are accumulated
+    # we fix it "by brute force" here
+    length = len(graph.nodes)
+    max_val = max([k for k, _ in graph.nodes.items()])
+    offset = max_val - length + 1
+    dict_ = {}
+    for k, v in dict.items():
+        dict_[k - offset] = v - offset
+
+
+    return dict_
 
 
 if __name__ == "__main__":
