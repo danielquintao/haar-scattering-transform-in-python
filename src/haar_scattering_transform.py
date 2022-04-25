@@ -83,11 +83,34 @@ class HaarScatteringTransform:
                     transform[j][n, 2 * q + 1] = abs(transform[j-1][pair[0], q] - transform[j-1][pair[1], q])
         return transform
 
+    def get_receptive_field(self, j: int, n: int):
+        """get receptive field (vertices used to compute) coefficients of row n in layer j
+
+        :param j: layer
+        :param n: row in layer
+        :return: set of receptive field indices
+        """
+        set_ = {n}
+        for j_ in range(j, 0, -1):  # decrement until j_ == 1
+            prev = set()
+            for elem in set_:
+                for v in self.multi_resolution_approx_pairings[j_-1][elem]:
+                    prev.add(v)
+            set_ = prev
+        return set_
+
 if __name__ == "__main__":
     print(igraph.__version__)
     graph = igraph.Graph([(0, 1), (2, 3), (3, 4), (4, 5)])
+    print("Computing Haar Scattering Transform for graph:", graph)
     haar = HaarScatteringTransform(graph)
+    print("\nPairings per layer:")
     pprint.pp(haar.multi_resolution_approx_pairings)
     signal = np.array([1, 10, 100, 1000, 10000, 100000])
+    print("\nScattering transform coefficients at each layer for signal", signal)
     pprint.pp(haar.get_haar_scattering_transform(signal))
+    print("\nReceptive field of n=2, j=1")
+    print(haar.get_receptive_field(1, 2))
+    print("Receptive field of n=0, j=2")
+    print(haar.get_receptive_field(2, 0))
 
