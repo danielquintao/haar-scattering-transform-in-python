@@ -1,1 +1,4 @@
 blossalg
+numpy
+python-igraph
+scikit-image
