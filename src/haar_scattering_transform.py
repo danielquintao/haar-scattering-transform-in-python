@@ -54,8 +54,13 @@ class HaarScatteringTransform:
                     membership_[new_pos].append(pos)
             self.multi_resolution_approx_pairings.append(membership_)
 
+    def _xor(self, a, b):
+        return (a and not b) or (b and not a)
+
     def get_haar_scattering_transform(self, signal: np.ndarray, save_memory=False):
         """computes each layer's Haar scattering transforms for a signal defined on the graph used in __init__
+
+        If the signal is of dtype bool, boolean Haar scattering Transform (with AND and XOR) is automatically used
 
         :param signal: 1D numpy array with scalar signals COHERENTLY WITH THE ORDER OF THE (DOMAIN) GRAPH VERTICES
         :param save_memory: bool, whether to drop scattering coefficients when not enough paired nodes (True), or to
@@ -65,6 +70,7 @@ class HaarScatteringTransform:
         """
         if not isinstance(signal, np.ndarray) or signal.shape not in [(len(signal),), (len(signal), 1)]:
             raise ValueError("signal in unexpected format; should be 1D numpy array or column vector (numpy array)")
+        boolean = signal.dtype == bool
         signal = signal.reshape(-1, 1)
         if self.N != len(signal):
             raise ValueError("signal of incorrect length")
@@ -79,8 +85,10 @@ class HaarScatteringTransform:
             for q in range(n_cols):
                 pairing = self.multi_resolution_approx_pairings[j-1]
                 for n, pair in pairing.items():
-                    transform[j][n, 2 * q] = transform[j-1][pair[0], q] + transform[j-1][pair[1], q]
-                    transform[j][n, 2 * q + 1] = abs(transform[j-1][pair[0], q] - transform[j-1][pair[1], q])
+                    transform[j][n, 2 * q] = transform[j-1][pair[0], q] + transform[j-1][pair[1], q] if not boolean\
+                                                else transform[j-1][pair[0], q] and transform[j-1][pair[1], q]
+                    transform[j][n, 2 * q + 1] = abs(transform[j-1][pair[0], q] - transform[j-1][pair[1], q]) \
+                        if not boolean else self._xor(transform[j-1][pair[0], q], transform[j-1][pair[1], q])
         return transform
 
     def get_receptive_field(self, j: int, n: int):
@@ -98,6 +106,7 @@ class HaarScatteringTransform:
                     prev.add(v)
             set_ = prev
         return set_
+
 
 if __name__ == "__main__":
     print(igraph.__version__)

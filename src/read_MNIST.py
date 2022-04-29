@@ -6,7 +6,7 @@ import gzip
 import os
 
 
-def read_10000_from_MNIST(folder='../data/', train=True, one_hot=False):
+def read_10000_from_MNIST(folder='../data/', train=True, one_hot=False, binarize=False):
     """reads MNIST, adapted from https://stackoverflow.com/a/53570674
 
     """
@@ -24,6 +24,9 @@ def read_10000_from_MNIST(folder='../data/', train=True, one_hot=False):
     data = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
     data = data.reshape(num_images, image_size, image_size)
     data /= 255.  # rescale to gray scale
+
+    if binarize:
+        data = data > 0.5
 
     # LABELS:
     if train:
