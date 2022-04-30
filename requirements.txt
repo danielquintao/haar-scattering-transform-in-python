@@ -1,4 +1,5 @@
 blossalg
 numpy
 python-igraph
-scikit-image
+scikit-learn
+scikit-image  # for example1 only

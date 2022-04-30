@@ -34,4 +34,4 @@ to convert corresponding signals to the right format.
 - ``read_MNIST.py`` reads the MNIST that we should be able to find under ``./data/``.
 - ``read_ECG5000.py`` reads the ECG5000 data set we should be able to find under `./data/``.
 
-Illustration files: all the files starting with ``example_[...]``
+Illustration files: all the files starting with ``example[...]``
