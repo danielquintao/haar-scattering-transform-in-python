@@ -2,7 +2,7 @@ from read_MNIST import read_10000_from_MNIST
 import numpy as np
 import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
-from images2graphs import graph_for_grid, project_signal, signal2image
+from unstructured2graphs import graph_for_grid, project_signal, signal2image
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import RidgeClassifier

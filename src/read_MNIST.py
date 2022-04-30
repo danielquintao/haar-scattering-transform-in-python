@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
-from images2graphs import graph_for_grid, project_signal, signal2image
+from unstructured2graphs import graph_for_grid, project_signal, signal2image
 import gzip
 import os
 

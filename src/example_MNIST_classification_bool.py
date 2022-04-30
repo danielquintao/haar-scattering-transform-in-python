@@ -1,7 +1,7 @@
 from read_MNIST import read_10000_from_MNIST
 import numpy as np
 from haar_scattering_transform import HaarScatteringTransform
-from images2graphs import graph_for_grid
+from unstructured2graphs import graph_for_grid
 from sklearn.linear_model import RidgeClassifier
 
 

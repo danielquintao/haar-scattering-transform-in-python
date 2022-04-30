@@ -7,6 +7,9 @@ import numpy as np
 ########################################################################################################################
 
 
+# IMAGES
+
+
 def graph_for_grid(shape):
     """ create igraph Graph representing the gris of an image
 
@@ -41,6 +44,18 @@ def signal2image(signal, shape):
     if not isinstance(signal, np.ndarray) or signal.shape != (np.product(shape),):
         raise ValueError("wrong format; signal should be 1D numpy array with shape[0] * shape[1] entries")
     return signal.reshape(*shape)
+
+
+# PERIODIC TIME SERIES
+
+
+def graph_for_per_time_series(length):
+    """ create igraph Graph representing the cyclic graph of a periodic time series
+
+    :param length: int (number of samples for the time series signals)
+    :return: igraph
+    """
+    return igraph.Graph.Ring(length)
 
 
 if __name__ == "__main__":

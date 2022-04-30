@@ -4,7 +4,7 @@ from skimage import data, color
 from skimage.transform import rescale
 import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
-from images2graphs import graph_for_grid, project_signal, signal2image
+from unstructured2graphs import graph_for_grid, project_signal, signal2image
 
 # im = imageio.imread('../data/car.png')
 # print(im.shape)
