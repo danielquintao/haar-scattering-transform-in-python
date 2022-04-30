@@ -1,3 +1,7 @@
+"""Another classification illustration, this time with ECG5000 data set
+
+"""
+
 from read_ECG5000 import read_ECG5000
 import numpy as np
 from haar_scattering_transform import HaarScatteringTransform

@@ -1,3 +1,7 @@
+""" This example is an illustration comparing the boolean and original versions of Haar Scattering Transform
+
+"""
+
 from read_MNIST import read_10000_from_MNIST
 import numpy as np
 from haar_scattering_transform import HaarScatteringTransform
@@ -19,7 +23,6 @@ for X in X_train[:]:
     transform = haar.get_haar_scattering_transform(X)
     X_train_haar.append(transform[-1].flatten())
 X_train_haar = np.array(X_train_haar)
-print("DEBUG", X_train_haar.dtype)
 
 X_test_haar = []
 for X in X_test[:]:

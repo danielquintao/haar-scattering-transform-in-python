@@ -1,14 +1,17 @@
+"""This is an illustration of classification in MNIST: original versus Haar Scattering features
+
+We compare the representations in both a nonlinear and a linear classifiers.
+We did NOT perform dimension reduction as in Chen X., Cheng X., Mallat S. 2014
+
+"""
+
 from read_MNIST import read_10000_from_MNIST
 import numpy as np
-import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
-from unstructured2graphs import graph_for_grid, project_signal, signal2image
+from unstructured2graphs import graph_for_grid
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import LinearSVC
 from sklearn.linear_model import RidgeClassifier
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import GridSearchCV
 
 X_train, y_train = read_10000_from_MNIST()
 X_test, y_test = read_10000_from_MNIST(train=False)

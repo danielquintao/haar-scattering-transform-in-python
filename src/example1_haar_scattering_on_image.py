@@ -1,13 +1,18 @@
+""" This is just a visualization of the Haar scattering Transform applied on an image
+
+Due to limitations of the package we use for Blossom Algorithm, we needed to subsample the example image to avoid
+memory issues. We can still recognize the scikit-image Astronaut example:
+https://scikit-image.org/docs/dev/api/skimage.data.html#skimage.data.astronaut
+
+"""
+
 import numpy as np
-import imageio
 from skimage import data, color
 from skimage.transform import rescale
 import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
 from unstructured2graphs import graph_for_grid, project_signal, signal2image
 
-# im = imageio.imread('../data/car.png')
-# print(im.shape)
 im = color.rgb2gray(data.astronaut())
 im = rescale(im, 0.0625)  # ATTENTION: Python crashes during blossom algorithm if image is too large
 print(im.shape)

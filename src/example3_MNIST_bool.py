@@ -1,10 +1,13 @@
+"""Visualizing boolean Haar Scattering Transforms of binarized MNIST (for the scalar case, run read_MNIST.py as script)
+
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from haar_scattering_transform import HaarScatteringTransform
 from unstructured2graphs import graph_for_grid, project_signal, signal2image
 from read_MNIST import read_10000_from_MNIST
-import gzip
-import os
+
 
 ########################################################################################################################
 # HAAR SCATTERING TRANSFORM FOR BOOLEAN VARIABLES ON BINARIZED MNIST
