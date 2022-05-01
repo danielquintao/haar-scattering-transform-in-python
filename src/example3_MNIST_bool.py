@@ -18,7 +18,7 @@ X_train, y_train = read_10000_from_MNIST(binarize=True)
 im = X_train[0]
 J = 3
 
-fig = plt.figure(constrained_layout=True, figsize=(10, 4))
+fig = plt.figure(constrained_layout=True, figsize=(11, 5.5))
 ax = fig.subplots(J + 1, 2 ** J)
 
 ax[0][0].imshow(im, cmap="gray")
