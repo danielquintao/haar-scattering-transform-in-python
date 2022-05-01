@@ -42,18 +42,18 @@ class HaarScatteringTransform:
                 if v["pair"] is None:
                     i += 1
                     v["pair"] = i
-            clus = igraph.VertexClustering.FromAttribute(g, attribute="pair", intervals=list(range(i + 1)))
-            membership = [v["pair"] for v in g.vs]
+            clus = igraph.VertexClustering(g, membership=[v["pair"] for v in g.vs])
+            membership = {i: c for i, c in enumerate(clus.membership)}
             is_paired_list = [v["pair"] < len(matching_set) for v in g.vs]
-            return membership, clus.cluster_graph(), is_paired_list  # membership is a list of pair index e.g. [0,1,0,1]
+            return membership, clus.cluster_graph(), is_paired_list
 
         for j in range(J):
             membership, g, is_paired_list = multi_resolution_map(g, j)
-            # convert to new_pos : (a_n, b_n) form
+            # convert to {new_pos : [a_n, b_n]} format
             membership_ = defaultdict(list)
-            for pos, (new_pos, is_paired) in enumerate(zip(membership, is_paired_list)):
-                if is_paired:  # ignore unpaired nodes
-                    membership_[new_pos].append(pos)
+            for ((prev, new), is_paired) in zip(membership.items(), is_paired_list):
+                if is_paired:
+                    membership_[new].append(prev)
             self.multi_resolution_approx_pairings.append(membership_)
 
     def _xor(self, a, b):
