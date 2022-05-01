@@ -32,7 +32,9 @@ class HaarScatteringTransform:
                 matching_set.add((min(k, v), max(k, v)))
             if len(matching_set) < g.vcount() / 2:
                 print("{} unmatched vertices in layer {}".format(g.vcount() - 2 * len(matching_set), j))
-            for i, (u, v) in enumerate(matching_set):
+            i = -1
+            for (u, v) in matching_set:
+                i += 1
                 g.vs(u)["pair"] = i
                 g.vs(v)["pair"] = i
             # unmatched

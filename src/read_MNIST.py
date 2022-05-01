@@ -60,7 +60,7 @@ if __name__ == "__main__":
     fig = plt.figure(constrained_layout=True, figsize=(10, 4))
     ax = fig.subplots(J + 1, 2 ** J)
 
-    ax[0][0].imshow(im, cmap="gray")
+    ax[0][0].imshow(im, cmap="gray")  # OR cmap="gray", vmin=0, vmax=1)
     ax[0][0].set_xticks([])
     ax[0][0].set_yticks([])
     ax[0][0].set_ylabel("j=0")
@@ -75,7 +75,7 @@ if __name__ == "__main__":
             for q in range(Q):
                 imgs[q][np.array(list(v_set))] = coeffs[n, q]
         for q in range(len(imgs)):
-            ax[j][q].imshow(signal2image(imgs[q], im.shape), cmap="gray")
+            ax[j][q].imshow(signal2image(imgs[q], im.shape), cmap="gray")  # OR cmap="gray", vmin=0, vmax=1)
             ax[j][q].set_xticks([])
             ax[j][q].set_yticks([])
         ax[j][0].set_ylabel("j=" + str(j))
