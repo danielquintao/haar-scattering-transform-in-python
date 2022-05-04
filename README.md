@@ -1,10 +1,6 @@
 # Haar Scattering Transform in Python
 A non-official implementation of "Unsupervised Deep Haar Scattering on Graphs, Chen X., Cheng X., Mallat S. 2014"
 
-![](figures/MNIST_j=3.png)
-
-(Haar scattering transform of a handwritten digit 5)
-
 ## Data
 
 Please download [MNIST](http://yann.lecun.com/exdb/mnist/) and 
