@@ -28,7 +28,7 @@ in that (graph) domain and computes its scalar or boolean Haar Scattering Transf
 (this is automatically detected).
 - ``matching.py`` calls [blossalg](https://github.com/nenb/blossalg) methods that help us matching "nodes" in the Haar 
 Scattering Transform. The package ``blossalg`` goal is to implement the Blossom Algorithm and it is still very young, 
-but it works for this project. Install it at your own risk ! 
+but it works for this project. 
 - ``unstructured2graphs.py`` has some utilities to build the domain graph for image grids and periodic time series, and 
 to convert corresponding signals to the right format.
 - ``read_MNIST.py`` reads the MNIST that we should be able to find under ``./data/``.

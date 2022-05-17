@@ -13,10 +13,11 @@ im0 = np.zeros((8, 8)).astype(float)  # black
 im1 = np.ones((8, 8)).astype(float)  # white
 im2 = np.tile(np.eye(2), (4, 4)).astype(float)  # checker board
 im3 = np.tile(np.diag([1, 0, 0, 0]), (2, 2)).astype(float)  # just visualize it
+im4 = 1 - im2  # checkerboard starting from black tile
 
 J = 2
 
-for im in [im0, im1, im2, im3]:
+for im in [im0, im1, im2, im3, im4]:
     fig = plt.figure(constrained_layout=True, figsize=(6, 4))
     ax = fig.subplots(J + 1, 2 ** J)
 

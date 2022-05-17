@@ -1,6 +1,6 @@
 """ This is just a visualization of the Haar scattering Transform applied on an image
 
-Due to limitations of the package we use for Blossom Algorithm, we needed to subsample the example image to avoid
+Due to technical issues with the Blossom Algorithm, we need to subsample the example image to avoid
 memory issues. We can still recognize the scikit-image Astronaut example:
 https://scikit-image.org/docs/dev/api/skimage.data.html#skimage.data.astronaut
 
